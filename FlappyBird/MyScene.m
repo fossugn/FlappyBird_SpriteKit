@@ -2,14 +2,13 @@
 //  MyScene.m
 //  FlappyBird
 //
-//  Created by MacBook  on 7/13/14.
-//  Copyright (c) 2014 MacBook . All rights reserved.
+//  Created by Eugene K.  on 7/13/14.
+//  Copyright (c) 2014 Eugene K. All rights reserved.
 //
 
 #import "MyScene.h"
 #import "StartGameLayer.h"
 #import "GameOverLayer.h"
-
 
 #define TIME 1.5
 #define MINIMUM_PILLER_HEIGHT 50.0f
@@ -19,9 +18,13 @@
 #define START_GAME_LAYER_Z_POSITION     150
 #define GAME_OVER_LAYER_Z_POSITION      200
 
-
 #define Upward_PILLER @"Upward_Green_Pipe"
 #define Downward_PILLER @"Downward_Green_Pipe"
+#define kYellowBirdTextureWingUp @"Yellow_Bird_Wing_Up"
+#define kYellowBirdTextureWingStraight @"Yellow_Bird_Wing_Straight"
+#define kYellowBirdTextureWingDown @"Yellow_Bird_Wing_Down"
+#define kScrollingBackgroundImageName @"Bottom_Scroller"
+#define kBackGroundImageNameModeNight @"Night_Background"
 
 #define kDownBackgroundName @"bg"
 #define kFlyingBirdActionKey @"flyingFlappyBird"
@@ -167,7 +170,7 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 
 - (void) initializeBackGround:(CGSize) sceneSize
 {
-    self.backgroundImageNode = [SKSpriteNode spriteNodeWithImageNamed:@"Night_Background"];
+    self.backgroundImageNode = [SKSpriteNode spriteNodeWithImageNamed:kBackGroundImageNameModeNight];
     self.backgroundImageNode.size = sceneSize;
     self.backgroundImageNode.position = CGPointMake(self.backgroundImageNode.size.width/2, self.frame.size.height/2);
     [self addChild:self.backgroundImageNode];
@@ -176,7 +179,7 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 - (void) initializingScrollingBackground
 {
     for (int i = 0; i < 2; i++) {
-        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"Bottom_Scroller"];
+        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:kScrollingBackgroundImageName];
         bg.zPosition = BOTTOM_BACKGROUND_Z_POSITION;
         bottomScrollerHeight = bg.size.height;
 //        bg.position = CGPointMake(i * bg.size.width, 0);
@@ -216,17 +219,17 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
         switch (i) {
             case 0:
             {
-                textureName = @"Yellow_Bird_Wing_Up";
+                textureName = kYellowBirdTextureWingUp;
                 break;
             }
             case 1:
             {
-                textureName = @"Yellow_Bird_Wing_Straight";
+                textureName = kYellowBirdTextureWingStraight;
                 break;
             }
             case 2:
             {
-                textureName = @"Yellow_Bird_Wing_Down";
+                textureName = kYellowBirdTextureWingDown;
                 break;
             }
                 
@@ -241,9 +244,6 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
     
     self.flappyBird = [SKSpriteNode spriteNodeWithTexture:[_flappyBirdFrames objectAtIndex:1]];
     
-//    self.flappyBird = [SKSpriteNode spriteNodeWithImageNamed:@"Yellow_Bird_Wing_Down"];
-//    self.flappyBird.position = CGPointMake(self.backgroundImageNode.size.width * 0.3f, self.frame.size.height * 0.6f);
-//    
     /*
      * Create a physics and specify its geometrical shape so that collision algorithm
      * can work more prominently
@@ -431,13 +431,13 @@ static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b)
 //    //Remove pillar if collision is detected and continue to play
 //    [pillar removeFromParent];
     
-    NSLog(@"pillar didCollideWithBird");
+//    NSLog(@"pillar didCollideWithBird");
     [self showGameOverLayer];
 }
 
 - (void)flappyBird:(SKSpriteNode *)bird didCollideWithBottomScoller:(SKSpriteNode *)bottomBackground
 {
-    NSLog(@"flappyBird didCollideWithBottomScoller");
+//    NSLog(@"flappyBird didCollideWithBottomScoller");
     [self showGameOverLayer];
 }
 

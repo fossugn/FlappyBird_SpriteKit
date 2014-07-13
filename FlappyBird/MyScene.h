@@ -3,7 +3,7 @@
 //  FlappyBird
 //
 
-//  Copyright (c) 2014 MacBook . All rights reserved.
+//  Copyright (c) 2014 Eugene K. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKit.h>
